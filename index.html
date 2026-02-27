@@ -38,7 +38,6 @@
   body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
   body.no-scroll { overflow: hidden; }
   
-  /* Layout */
   #app { display: flex; flex-direction: column; min-height: 100vh; }
   .topbar { 
     position: sticky; top: 0; z-index: 100;
@@ -70,12 +69,10 @@
   .nav-item.active { color: var(--accent); }
   .nav-item svg { width: 22px; height: 22px; }
   
-  /* Cards */
   .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--card-r); padding: 16px; }
   .card + .card { margin-top: 12px; }
   .card-title { font-size: 0.75rem; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
   
-  /* Buttons */
   .btn { border: none; border-radius: 10px; cursor: pointer; font-family: var(--font); font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
   .btn-primary { background: var(--accent); color: #0a0c12; padding: 12px 20px; font-size: 0.9rem; width: 100%; }
   .btn-primary:active { transform: scale(0.98); opacity: 0.9; }
@@ -92,8 +89,14 @@
     transition: all 0.2s;
   }
   .btn-fab:active { transform: scale(0.95); }
+  .btn-pay-sm {
+    padding: 5px 10px; font-size: 0.75rem; border-radius: 8px;
+    background: rgba(74,222,128,0.12); color: var(--green);
+    border: 1px solid rgba(74,222,128,0.3);
+    cursor: pointer; font-family: var(--font); font-weight: 700; white-space: nowrap;
+  }
+  .btn-pay-sm:active { opacity: 0.8; }
   
-  /* Forms */
   .form-group { margin-bottom: 14px; }
   .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text2); margin-bottom: 6px; }
   .form-input {
@@ -106,7 +109,6 @@
   .form-input::placeholder { color: var(--text3); }
   select.form-input { cursor: pointer; }
   
-  /* Modal */
   .modal-overlay {
     position: fixed; inset: 0; z-index: 200;
     background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
@@ -126,16 +128,11 @@
   .modal-footer { display: flex; gap: 10px; margin-top: 16px; }
   .modal-footer .btn { flex: 1; padding: 12px; }
 
-  /* Tabs */
   .tabs { display: flex; gap: 4px; background: var(--bg3); border-radius: 12px; padding: 4px; margin-bottom: 16px; }
   .tab { flex: 1; padding: 8px; border: none; border-radius: 8px; background: none; color: var(--text2); font-family: var(--font); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .tab.active { background: var(--bg4); color: var(--accent); }
 
-  /* Transaction item */
-  .tx-item {
-    display: flex; align-items: center; gap: 12px; padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
+  .tx-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .tx-item:last-child { border-bottom: none; }
   .tx-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
   .tx-info { flex: 1; min-width: 0; }
@@ -144,14 +141,8 @@
   .tx-amount { font-family: var(--mono); font-size: 0.95rem; font-weight: 700; white-space: nowrap; }
   .tx-amount.expense { color: var(--red); }
   .tx-amount.income { color: var(--green); }
-  
-  /* Payment badges */
-  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
-  .badge-cash { background: rgba(251,191,36,0.15); color: var(--yellow); }
-  .badge-bank { background: rgba(56,189,248,0.15); color: var(--accent2); }
-  .badge-credit { background: rgba(244,114,182,0.15); color: var(--accent3); }
+  .tx-amount.payment { color: var(--accent2); }
 
-  /* Summary cards */
   .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
   .summary-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
   .summary-card.full { grid-column: 1/-1; }
@@ -161,30 +152,24 @@
   .summary-value.expense { color: var(--red); }
   .summary-value.neutral { color: var(--accent); }
 
-  /* Payment method rows */
   .method-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .method-row:last-child { border-bottom: none; }
   .method-left { display: flex; align-items: center; gap: 10px; }
   .method-icon { width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .method-name { font-size: 0.9rem; font-weight: 600; }
-  .method-sub { font-size: 0.72rem; color: var(--text2); }
   .method-amount { font-family: var(--mono); font-weight: 700; font-size: 0.95rem; }
 
-  /* Category row */
   .cat-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
   .cat-row:last-child { border-bottom: none; }
-  .cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
   .cat-bar-wrap { flex: 1; }
   .cat-bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px; }
   .cat-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
   .cat-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
 
-  /* Date picker area */
   .date-nav { display: flex; align-items: center; gap: 8px; }
   .date-nav input { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: var(--font); padding: 7px 12px; font-size: 0.85rem; cursor: pointer; outline: none; }
   .date-nav input:focus { border-color: var(--accent); }
 
-  /* Settings list */
   .settings-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
   .settings-item:last-child { border-bottom: none; }
   .settings-item-left { display: flex; align-items: center; gap: 12px; }
@@ -192,33 +177,26 @@
   .settings-item-title { font-weight: 600; font-size: 0.9rem; }
   .settings-item-sub { font-size: 0.75rem; color: var(--text2); margin-top: 1px; }
 
-  /* Color picker */
   .color-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; }
   .color-swatch { width: 100%; aspect-ratio: 1; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; }
   .color-swatch.selected { border-color: white; transform: scale(0.85); }
 
-  /* Emoji picker */
   .emoji-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
   .emoji-btn { padding: 6px; border-radius: 8px; border: 1px solid transparent; background: none; font-size: 1.2rem; cursor: pointer; transition: all 0.15s; }
   .emoji-btn:hover, .emoji-btn.selected { background: var(--bg3); border-color: var(--accent); }
 
-  /* Chart container */
   .chart-wrap { position: relative; height: 200px; margin-top: 8px; }
   .chart-wrap.pie { height: 220px; }
 
-  /* Chip selector */
   .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip { padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); font-family: var(--font); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .chip.selected { background: var(--accent); color: #0a0c12; border-color: var(--accent); }
 
-  /* Amount input special */
   .amount-input { font-family: var(--mono); font-size: 1.8rem; font-weight: 700; color: var(--accent); text-align: right; }
   
-  /* Toast */
   .toast { position: fixed; top: 70px; left: 50%; transform: translateX(-50%) translateY(-20px); z-index: 999; background: var(--bg4); border: 1px solid var(--border); border-radius: 12px; padding: 10px 20px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; opacity: 0; transition: all 0.3s; pointer-events: none; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  /* Scrollbar */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -252,6 +230,30 @@
   .card-limit-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-top: 10px; }
   .card-limit-fill { height: 100%; background: var(--accent3); border-radius: 2px; }
 
+  /* CC dashboard block */
+  .cc-block { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 10px; }
+  .cc-block-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+  .cc-block-left { display: flex; align-items: center; gap: 10px; flex: 1; }
+  .cc-block-icon { width: 38px; height: 38px; border-radius: 12px; background: rgba(244,114,182,.12); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .cc-block-name { font-weight: 700; font-size: .92rem; }
+  .cc-block-sub { font-size: .72rem; color: var(--text2); margin-top: 1px; }
+  .cc-block-right { text-align: right; flex-shrink: 0; }
+  .cc-block-amount { font-family: var(--mono); font-weight: 700; font-size: 1rem; color: var(--accent3); }
+  .cc-block-remaining { font-size: .7rem; color: var(--text2); margin-top: 2px; }
+  .cc-limit-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .cc-limit-fill { height: 100%; border-radius: 3px; transition: width .5s; }
+  .cc-pct-row { display: flex; justify-content: space-between; font-size: .7rem; color: var(--text3); margin-top: 4px; margin-bottom: 4px; }
+  .cc-child-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0 7px 16px; border-left: 2px solid var(--border); margin-left: 4px; margin-top: 6px; }
+  .cc-main-own-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-top: 1px solid var(--border); margin-top: 8px; }
+  .cc-grand-total { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid var(--border); margin-top: 4px; }
+
+  /* Pay history */
+  .pay-history-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: .82rem; }
+  .pay-history-item:last-child { border-bottom: none; }
+
+  /* Info box */
+  .info-box { background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.2); border-radius: 10px; padding: 10px 14px; font-size: .8rem; color: var(--accent2); margin-bottom: 14px; }
+
   .page { display: none; }
   .page.active { display: block; }
 </style>
@@ -264,43 +266,35 @@
   </div>
   
   <div class="main-content">
-    <!-- Dashboard Page -->
     <div id="page-dashboard" class="page active">
       <div class="tabs" id="period-tabs">
         <button class="tab active" onclick="setPeriod('day')">Day</button>
         <button class="tab" onclick="setPeriod('month')">Month</button>
         <button class="tab" onclick="setPeriod('year')">Year</button>
       </div>
-      
-      <div class="card" style="margin-bottom:12px">
-        <div id="period-selector"></div>
-      </div>
-      
+      <div class="card" style="margin-bottom:12px"><div id="period-selector"></div></div>
       <div class="summary-grid" id="summary-grid"></div>
-      
       <div class="card" style="margin-bottom:12px">
         <div class="card-title">แยกตามช่องทางชำระ</div>
         <div id="payment-breakdown"></div>
-        <div class="chart-wrap pie">
-          <canvas id="pie-chart"></canvas>
-        </div>
+        <div class="chart-wrap pie"><canvas id="pie-chart"></canvas></div>
       </div>
-      
       <div class="card" style="margin-bottom:12px">
         <div class="card-title">แยกตาม Category</div>
         <div id="category-breakdown"></div>
-        <div class="chart-wrap">
-          <canvas id="bar-chart"></canvas>
-        </div>
+        <div class="chart-wrap"><canvas id="bar-chart"></canvas></div>
       </div>
-
+      <!-- CC section — always alltime, not filtered by period -->
       <div class="card" style="margin-bottom:12px" id="credit-card-section">
-        <div class="card-title">แยกตามบัตรเครดิต</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px">
+          <div class="card-title" style="margin-bottom:0">ยอดค้างบัตรเครดิต</div>
+          <span style="font-size:.7rem;color:var(--text3);font-weight:600;background:var(--bg3);padding:3px 8px;border-radius:6px;border:1px solid var(--border)">ยอดสะสมทั้งหมด</span>
+        </div>
+        <div style="font-size:.72rem;color:var(--text3);margin-bottom:14px">ยอดใช้จ่ายทั้งหมด หักยอดที่ชำระแล้ว</div>
         <div id="credit-card-breakdown"></div>
       </div>
     </div>
     
-    <!-- Transactions Page -->
     <div id="page-transactions" class="page">
       <div class="section-header">
         <div class="section-title">รายการทั้งหมด</div>
@@ -309,59 +303,42 @@
       <div id="tx-list"></div>
     </div>
     
-    <!-- Settings Page -->
     <div id="page-settings" class="page">
       <div class="card">
         <div class="card-title">ตั้งค่า</div>
         <div class="settings-item" onclick="showCategorySettings()">
           <div class="settings-item-left">
             <div class="settings-item-icon" style="background:rgba(110,231,183,0.1)">🏷️</div>
-            <div>
-              <div class="settings-item-title">หมวดหมู่</div>
-              <div class="settings-item-sub" id="cat-count">0 หมวดหมู่</div>
-            </div>
+            <div><div class="settings-item-title">หมวดหมู่</div><div class="settings-item-sub" id="cat-count">0 หมวดหมู่</div></div>
           </div>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
         <div class="settings-item" onclick="showCardSettings()">
           <div class="settings-item-left">
             <div class="settings-item-icon" style="background:rgba(244,114,182,0.1)">💳</div>
-            <div>
-              <div class="settings-item-title">บัตรเครดิต</div>
-              <div class="settings-item-sub" id="card-count">0 ใบ</div>
-            </div>
+            <div><div class="settings-item-title">บัตรเครดิต</div><div class="settings-item-sub" id="card-count">0 ใบ</div></div>
           </div>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
         <div class="settings-item" onclick="exportData()">
           <div class="settings-item-left">
             <div class="settings-item-icon" style="background:rgba(56,189,248,0.1)">📤</div>
-            <div>
-              <div class="settings-item-title">Export ข้อมูล</div>
-              <div class="settings-item-sub">บันทึกเป็น JSON</div>
-            </div>
+            <div><div class="settings-item-title">Export ข้อมูล</div><div class="settings-item-sub">บันทึกเป็น JSON</div></div>
           </div>
         </div>
         <div class="settings-item" onclick="importData()">
           <div class="settings-item-left">
             <div class="settings-item-icon" style="background:rgba(251,191,36,0.1)">📥</div>
-            <div>
-              <div class="settings-item-title">Import ข้อมูล</div>
-              <div class="settings-item-sub">โหลดจาก JSON</div>
-            </div>
+            <div><div class="settings-item-title">Import ข้อมูล</div><div class="settings-item-sub">โหลดจาก JSON</div></div>
           </div>
         </div>
       </div>
-      
       <div class="card" style="margin-top:12px">
         <div class="card-title">ข้อมูลแอป</div>
         <div class="settings-item" style="cursor:default">
           <div class="settings-item-left">
             <div class="settings-item-icon" style="background:rgba(167,139,250,0.1)">ℹ️</div>
-            <div>
-              <div class="settings-item-title">Money Log v1.0</div>
-              <div class="settings-item-sub">PWA · IndexedDB · Works Offline</div>
-            </div>
+            <div><div class="settings-item-title">Money Log v1.1</div><div class="settings-item-sub">PWA · IndexedDB · Works Offline</div></div>
           </div>
         </div>
       </div>
@@ -382,7 +359,6 @@
       ตั้งค่า
     </button>
   </nav>
-  
   <button class="btn-fab" id="fab" onclick="showAddModal()">+</button>
 </div>
 
@@ -419,13 +395,46 @@
       <label class="form-label">เลือกบัตร</label>
       <select class="form-input" id="tx-card-id"></select>
     </div>
-    <div class="form-group" style="width: 100%;">
+    <div class="form-group" style="width:100%">
       <label class="form-label">วันที่</label>
-      <input type="date" class="form-input" style="width: 92%;" id="tx-date">
+      <input type="date" class="form-input" style="width:92%" id="tx-date">
     </div>
     <div class="modal-footer">
       <button class="btn btn-sm" onclick="closeModal('modal-add')">ยกเลิก</button>
       <button class="btn btn-primary" onclick="saveTransaction()">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pay Credit Card Modal -->
+<div class="modal-overlay" id="modal-pay-card">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">💳 จ่ายค่าบัตรเครดิต</div>
+    <div class="info-box" id="pay-card-info">กำลังโหลด...</div>
+    <div class="form-group">
+      <label class="form-label">บัตรที่ต้องการจ่าย</label>
+      <select class="form-input" id="pay-card-id" onchange="updatePayCardInfo()"></select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">จำนวนที่จ่าย (บาท)</label>
+      <input type="number" class="form-input amount-input" id="pay-amount" placeholder="0.00" inputmode="decimal">
+    </div>
+    <div class="form-group">
+      <label class="form-label">หมายเหตุ</label>
+      <input type="text" class="form-input" id="pay-note" placeholder="เช่น จ่ายบัตร ก.พ. 68...">
+    </div>
+    <div class="form-group" style="width:100%">
+      <label class="form-label">วันที่จ่าย</label>
+      <input type="date" class="form-input" style="width:92%" id="pay-date">
+    </div>
+    <div id="pay-history-section" style="margin-top:8px">
+      <div style="font-size:.75rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">ประวัติการจ่าย</div>
+      <div id="pay-history-list"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-sm" onclick="closeModal('modal-pay-card')">ยกเลิก</button>
+      <button class="btn btn-primary" style="background:var(--green);color:#0a0c12" onclick="saveCardPayment()">✓ บันทึกการจ่าย</button>
     </div>
   </div>
 </div>
@@ -439,9 +448,7 @@
       <button class="btn btn-sm" onclick="showAddCategoryModal()">+ เพิ่ม</button>
     </div>
     <div id="category-list" style="margin-top:12px"></div>
-    <div style="margin-top:12px">
-      <button class="btn btn-sm" style="width:100%" onclick="closeModal('modal-categories')">ปิด</button>
-    </div>
+    <div style="margin-top:12px"><button class="btn btn-sm" style="width:100%" onclick="closeModal('modal-categories')">ปิด</button></div>
   </div>
 </div>
 
@@ -479,9 +486,7 @@
       <button class="btn btn-sm" onclick="showAddCardModal()">+ เพิ่ม</button>
     </div>
     <div id="card-list" style="margin-top:12px"></div>
-    <div style="margin-top:12px">
-      <button class="btn btn-sm" style="width:100%" onclick="closeModal('modal-cards')">ปิด</button>
-    </div>
+    <div style="margin-top:12px"><button class="btn btn-sm" style="width:100%" onclick="closeModal('modal-cards')">ปิด</button></div>
   </div>
 </div>
 
@@ -525,7 +530,7 @@
     <div class="modal-handle"></div>
     <div id="tx-detail-content"></div>
     <div class="modal-footer">
-      <button class="btn btn-sm btn-danger" id="btn-delete-tx" onclick="deleteCurrentTx()">🗑 ลบ</button>
+      <button class="btn btn-sm btn-danger" id="btn-delete-tx">🗑 ลบ</button>
       <button class="btn btn-sm" style="flex:2" onclick="closeModal('modal-tx-detail')">ปิด</button>
     </div>
   </div>
@@ -550,6 +555,7 @@
         <option value="">ทั้งหมด</option>
         <option value="expense">รายจ่าย</option>
         <option value="income">รายรับ</option>
+        <option value="card_payment">จ่ายบัตรเครดิต</option>
       </select>
     </div>
     <div class="form-group">
@@ -573,7 +579,7 @@
 <script>
 // ============ DATABASE ============
 let db;
-const DB_NAME = 'MoneyLogDB', DB_VER = 1;
+const DB_NAME = 'MoneyLogDB', DB_VER = 2;
 
 function openDB() {
   return new Promise((res, rej) => {
@@ -584,11 +590,15 @@ function openDB() {
         const s = d.createObjectStore('transactions', { keyPath: 'id', autoIncrement: true });
         s.createIndex('date', 'date');
       }
-      if (!d.objectStoreNames.contains('categories')) {
+      if (!d.objectStoreNames.contains('categories'))
         d.createObjectStore('categories', { keyPath: 'id', autoIncrement: true });
-      }
-      if (!d.objectStoreNames.contains('cards')) {
+      if (!d.objectStoreNames.contains('cards'))
         d.createObjectStore('cards', { keyPath: 'id', autoIncrement: true });
+      // Card payments store (new in v2)
+      if (!d.objectStoreNames.contains('card_payments')) {
+        const cp = d.createObjectStore('card_payments', { keyPath: 'id', autoIncrement: true });
+        cp.createIndex('mainCardId', 'mainCardId');
+        cp.createIndex('date', 'date');
       }
     };
     req.onsuccess = e => { db = e.target.result; res(db); };
@@ -604,7 +614,6 @@ function dbGetAll(store) {
     req.onerror = () => rej(req.error);
   });
 }
-
 function dbAdd(store, data) {
   return new Promise((res, rej) => {
     const tx = db.transaction(store, 'readwrite');
@@ -613,7 +622,6 @@ function dbAdd(store, data) {
     req.onerror = () => rej(req.error);
   });
 }
-
 function dbPut(store, data) {
   return new Promise((res, rej) => {
     const tx = db.transaction(store, 'readwrite');
@@ -622,7 +630,6 @@ function dbPut(store, data) {
     req.onerror = () => rej(req.error);
   });
 }
-
 function dbDelete(store, id) {
   return new Promise((res, rej) => {
     const tx = db.transaction(store, 'readwrite');
@@ -631,7 +638,6 @@ function dbDelete(store, id) {
     req.onerror = () => rej(req.error);
   });
 }
-
 function dbClear(store) {
   return new Promise((res, rej) => {
     const tx = db.transaction(store, 'readwrite');
@@ -658,7 +664,6 @@ let barChartInstance = null;
 
 const EMOJIS = ['🛍','🍔','🚗','🏠','💊','🎮','✈️','👗','🎓','💼','🛒','☕','🍕','🍜','🎵','📱','💻','🎬','🏋️','🐾','🌿','🎁','💡','🚿','🍺','💰','💸','📚','🔑','🎯','🏥','⛽','🌮','🍰','💈','🎪','🛴','🚌','🏊','🎨'];
 const COLORS = ['#6ee7b7','#38bdf8','#f472b6','#fb923c','#a78bfa','#fbbf24','#4ade80','#f87171','#e879f9','#22d3ee','#84cc16','#f97316','#818cf8','#f43f5e','#10b981','#0ea5e9'];
-
 const DEFAULT_CATEGORIES = [
   { name: 'อาหาร', emoji: '🍔', color: '#fb923c' },
   { name: 'เดินทาง', emoji: '🚗', color: '#38bdf8' },
@@ -673,36 +678,27 @@ const DEFAULT_CATEGORIES = [
 function formatMoney(n) {
   return new Intl.NumberFormat('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 }
-
 function formatDate(d) {
   return new Date(d).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' });
 }
-
 function toYMD(d) {
   const dt = new Date(d);
   return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
 }
-
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
+  setTimeout(() => t.classList.remove('show'), 2200);
 }
-
 function openModal(id) {
   document.getElementById(id).classList.add('open');
   document.body.classList.add('no-scroll');
 }
-
 function closeModal(id) {
   const el = document.getElementById(id);
   if (el) el.classList.remove('open');
-  // Remove no-scroll only when no other modal is open
-  const anyOpen = document.querySelector('.modal-overlay.open');
-  if (!anyOpen) {
-    document.body.classList.remove('no-scroll');
-  }
+  if (!document.querySelector('.modal-overlay.open')) document.body.classList.remove('no-scroll');
 }
 
 // ============ NAVIGATION ============
@@ -712,10 +708,7 @@ function showPage(page) {
   document.getElementById(`page-${page}`).classList.add('active');
   document.getElementById(`nav-${page}`).classList.add('active');
   currentPage = page;
-  
-  const fab = document.getElementById('fab');
-  fab.style.display = page === 'settings' ? 'none' : 'flex';
-  
+  document.getElementById('fab').style.display = page === 'settings' ? 'none' : 'flex';
   if (page === 'dashboard') renderDashboard();
   if (page === 'transactions') renderTransactions();
   if (page === 'settings') renderSettingsInfo();
@@ -749,71 +742,84 @@ function getPeriodRange() {
     return { from: d, to: d };
   } else if (currentPeriod === 'month') {
     const y = selectedMonth.getFullYear(), m = selectedMonth.getMonth();
-    const from = `${y}-${String(m+1).padStart(2,'0')}-01`;
-    const last = new Date(y, m+1, 0);
-    const to = toYMD(last);
-    return { from, to };
+    return { from: `${y}-${String(m+1).padStart(2,'0')}-01`, to: toYMD(new Date(y, m+1, 0)) };
   } else {
     const y = selectedYear.getFullYear();
     return { from: `${y}-01-01`, to: `${y}-12-31` };
   }
 }
 
+// ============ CARD BALANCE (ALLTIME) ============
+// Returns outstanding = totalSpent - totalPaid for a main card group
+function calcCardBalance(mainCard, allTxs, allPayments, suppCards) {
+  const related = [mainCard, ...suppCards.filter(s => s.mainCardId === mainCard.id)];
+  const relatedIds = related.map(c => c.id);
+
+  // Alltime spend for this card group
+  const totalSpent = allTxs
+    .filter(t => t.type === 'expense' && t.payment === 'credit' && relatedIds.includes(t.cardId))
+    .reduce((s, t) => s + t.amount, 0);
+
+  // Alltime payments for this main card
+  const totalPaid = allPayments
+    .filter(p => p.mainCardId === mainCard.id)
+    .reduce((s, p) => s + p.amount, 0);
+
+  const outstanding = Math.max(0, totalSpent - totalPaid);
+  const pct = mainCard.limit > 0 ? Math.min((outstanding / mainCard.limit) * 100, 100) : 0;
+
+  // Per-card spend breakdown
+  const perCard = {};
+  related.forEach(c => {
+    perCard[c.id] = allTxs
+      .filter(t => t.type === 'expense' && t.payment === 'credit' && t.cardId === c.id)
+      .reduce((s, t) => s + t.amount, 0);
+  });
+
+  return { totalSpent, totalPaid, outstanding, pct, perCard };
+}
+
 // ============ DASHBOARD ============
 async function renderDashboard() {
   renderPeriodSelector();
   const { from, to } = getPeriodRange();
-  const all = await dbGetAll('transactions');
-  const txs = all.filter(t => t.date >= from && t.date <= to);
+  const allTxs = await dbGetAll('transactions');
+  const periodTxs = allTxs.filter(t => t.date >= from && t.date <= to);
   const cats = await dbGetAll('categories');
   const cards = await dbGetAll('cards');
-  
-  const expenses = txs.filter(t => t.type === 'expense');
-  const incomes = txs.filter(t => t.type === 'income');
+  const allPayments = await dbGetAll('card_payments');
+
+  const expenses = periodTxs.filter(t => t.type === 'expense');
+  const incomes = periodTxs.filter(t => t.type === 'income');
   const totalExp = expenses.reduce((s, t) => s + t.amount, 0);
   const totalInc = incomes.reduce((s, t) => s + t.amount, 0);
-  
+
   // Summary
-  const sg = document.getElementById('summary-grid');
-  sg.innerHTML = `
+  document.getElementById('summary-grid').innerHTML = `
     <div class="summary-card"><div class="summary-label">รายรับ</div><div class="summary-value income">฿${formatMoney(totalInc)}</div></div>
     <div class="summary-card"><div class="summary-label">รายจ่าย</div><div class="summary-value expense">฿${formatMoney(totalExp)}</div></div>
     <div class="summary-card full"><div class="summary-label">คงเหลือ</div><div class="summary-value neutral">฿${formatMoney(totalInc - totalExp)}</div></div>
   `;
-  
+
   // Payment breakdown
   const cashExp = expenses.filter(t => t.payment === 'cash').reduce((s,t) => s+t.amount, 0);
   const bankExp = expenses.filter(t => t.payment === 'bank').reduce((s,t) => s+t.amount, 0);
   const creditExp = expenses.filter(t => t.payment === 'credit').reduce((s,t) => s+t.amount, 0);
-  
-  const pb = document.getElementById('payment-breakdown');
-  pb.innerHTML = `
-    <div class="method-row">
-      <div class="method-left"><div class="method-icon" style="background:rgba(251,191,36,.1)">💵</div><div><div class="method-name">เงินสด</div></div></div>
-      <div class="method-amount" style="color:var(--yellow)">฿${formatMoney(cashExp)}</div>
-    </div>
-    <div class="method-row">
-      <div class="method-left"><div class="method-icon" style="background:rgba(56,189,248,.1)">🏦</div><div><div class="method-name">Mobile Bank</div></div></div>
-      <div class="method-amount" style="color:var(--accent2)">฿${formatMoney(bankExp)}</div>
-    </div>
-    <div class="method-row">
-      <div class="method-left"><div class="method-icon" style="background:rgba(244,114,182,.1)">💳</div><div><div class="method-name">บัตรเครดิต</div></div></div>
-      <div class="method-amount" style="color:var(--accent3)">฿${formatMoney(creditExp)}</div>
-    </div>
+  document.getElementById('payment-breakdown').innerHTML = `
+    <div class="method-row"><div class="method-left"><div class="method-icon" style="background:rgba(251,191,36,.1)">💵</div><div><div class="method-name">เงินสด</div></div></div><div class="method-amount" style="color:var(--yellow)">฿${formatMoney(cashExp)}</div></div>
+    <div class="method-row"><div class="method-left"><div class="method-icon" style="background:rgba(56,189,248,.1)">🏦</div><div><div class="method-name">Mobile Bank</div></div></div><div class="method-amount" style="color:var(--accent2)">฿${formatMoney(bankExp)}</div></div>
+    <div class="method-row"><div class="method-left"><div class="method-icon" style="background:rgba(244,114,182,.1)">💳</div><div><div class="method-name">บัตรเครดิต</div></div></div><div class="method-amount" style="color:var(--accent3)">฿${formatMoney(creditExp)}</div></div>
     <div class="divider"></div>
-    <div class="method-row" style="padding:6px 0">
-      <div class="method-left"><div style="font-weight:700;font-size:.9rem">รวมรายจ่าย</div></div>
-      <div class="method-amount" style="color:var(--red)">฿${formatMoney(totalExp)}</div>
-    </div>
+    <div class="method-row" style="padding:6px 0"><div class="method-left"><div style="font-weight:700;font-size:.9rem">รวมรายจ่าย</div></div><div class="method-amount" style="color:var(--red)">฿${formatMoney(totalExp)}</div></div>
   `;
-  
+
   // Pie chart
   if (pieChartInstance) pieChartInstance.destroy();
   const pieCtx = document.getElementById('pie-chart').getContext('2d');
-  const pieData = [cashExp, bankExp, creditExp].filter(v => v > 0);
-  const pieLabels = ['เงินสด','Mobile Bank','บัตรเครดิต'].filter((_, i) => [cashExp,bankExp,creditExp][i] > 0);
-  const pieColors = ['#fbbf24','#38bdf8','#f472b6'].filter((_, i) => [cashExp,bankExp,creditExp][i] > 0);
-  
+  const pieRaw = [cashExp, bankExp, creditExp];
+  const pieData = pieRaw.filter(v => v > 0);
+  const pieLabels = ['เงินสด','Mobile Bank','บัตรเครดิต'].filter((_,i) => pieRaw[i] > 0);
+  const pieColors = ['#fbbf24','#38bdf8','#f472b6'].filter((_,i) => pieRaw[i] > 0);
   if (pieData.length > 0) {
     pieChartInstance = new Chart(pieCtx, {
       type: 'doughnut',
@@ -828,21 +834,14 @@ async function renderDashboard() {
       }
     });
   }
-  
+
   // Category breakdown
   const catMap = {};
-  expenses.forEach(t => {
-    if (!catMap[t.categoryId]) catMap[t.categoryId] = 0;
-    catMap[t.categoryId] += t.amount;
-  });
-  
+  expenses.forEach(t => { catMap[t.categoryId] = (catMap[t.categoryId] || 0) + t.amount; });
   const catBreakdown = Object.entries(catMap)
-    .map(([id, amount]) => {
-      const cat = cats.find(c => c.id == id) || { name: 'อื่นๆ', emoji: '📦', color: '#8892b0' };
-      return { cat, amount };
-    })
+    .map(([id, amount]) => ({ cat: cats.find(c => c.id == id) || { name: 'อื่นๆ', emoji: '📦', color: '#8892b0' }, amount }))
     .sort((a, b) => b.amount - a.amount);
-  
+
   const cb = document.getElementById('category-breakdown');
   if (catBreakdown.length === 0) {
     cb.innerHTML = '<div style="color:var(--text3);font-size:.85rem;padding:8px 0">ยังไม่มีข้อมูล</div>';
@@ -861,7 +860,7 @@ async function renderDashboard() {
       </div>
     `).join('');
   }
-  
+
   // Bar chart
   if (barChartInstance) barChartInstance.destroy();
   const barCtx = document.getElementById('bar-chart').getContext('2d');
@@ -888,165 +887,272 @@ async function renderDashboard() {
     });
   }
 
-  // Credit card breakdown
+  // ===== CREDIT CARD SECTION — ALWAYS ALLTIME =====
   const ccSection = document.getElementById('credit-card-section');
-  const ccBreakdown = document.getElementById('credit-card-breakdown');
-  const creditTxs = expenses.filter(t => t.payment === 'credit');
+  const ccEl = document.getElementById('credit-card-breakdown');
+  const mainCards = cards.filter(c => c.type === 'main');
+  const suppCards = cards.filter(c => c.type === 'supplementary');
 
-  if (cards.length === 0 || creditTxs.length === 0) {
+  if (mainCards.length === 0 && suppCards.length === 0) {
     ccSection.style.display = 'none';
-  } else {
-    ccSection.style.display = 'block';
+    return;
+  }
+  ccSection.style.display = 'block';
 
-    // Build card usage map — supplementary cards roll up to main card
-    const getEffectiveCard = (cardId) => {
-      const card = cards.find(c => c.id === cardId);
-      if (!card) return null;
-      if (card.type === 'supplementary') {
-        const main = cards.find(c => c.id === card.mainCardId);
-        return { display: card, billing: main || card };
-      }
-      return { display: card, billing: card };
-    };
+  let grandOutstanding = 0;
+  const blocks = [];
 
-    // Per-card stats (each card individually)
-    const cardMap = {};
-    creditTxs.forEach(t => {
-      if (!t.cardId) return;
-      if (!cardMap[t.cardId]) cardMap[t.cardId] = 0;
-      cardMap[t.cardId] += t.amount;
-    });
+  for (const mc of mainCards) {
+    const bal = calcCardBalance(mc, allTxs, allPayments, suppCards);
+    grandOutstanding += bal.outstanding;
 
-    // Main cards with their supplementary children
-    const mainCards = cards.filter(c => c.type === 'main');
-    const suppCards = cards.filter(c => c.type === 'supplementary');
+    const barColor = bal.pct > 80 ? 'var(--red)' : bal.pct > 50 ? 'var(--yellow)' : 'var(--accent3)';
+    const children = suppCards.filter(s => s.mainCardId === mc.id);
 
-    // Build sections: main card block + its supplementary cards
-    const sections = mainCards.map(mc => {
-      const children = suppCards.filter(s => s.mainCardId === mc.id);
-      const allRelated = [mc, ...children];
-      const totalUsed = allRelated.reduce((s, c) => s + (cardMap[c.id] || 0), 0);
-      const pct = mc.limit > 0 ? Math.min((totalUsed / mc.limit) * 100, 100) : 0;
-      const remaining = mc.limit > 0 ? mc.limit - totalUsed : null;
-
-      const childRows = children.map(ch => {
-        const chUsed = cardMap[ch.id] || 0;
-        if (chUsed === 0) return '';
-        return `
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0 7px 16px;border-left:2px solid var(--border);margin-left:4px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <span style="font-size:.85rem">🔗</span>
-              <div>
-                <div style="font-size:.82rem;font-weight:600">${ch.name}</div>
-                <div style="font-size:.7rem;color:var(--text3)">บัตรเสริม</div>
-              </div>
-            </div>
-            <div style="font-family:var(--mono);font-size:.85rem;font-weight:700;color:var(--accent3)">฿${formatMoney(chUsed)}</div>
-          </div>
-        `;
-      }).join('');
-
+    const childRows = children.map(ch => {
+      const chSpent = bal.perCard[ch.id] || 0;
+      if (chSpent === 0) return '';
       return `
-        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:10px">
-              <div style="width:38px;height:38px;border-radius:12px;background:rgba(244,114,182,.12);display:flex;align-items:center;justify-content:center;font-size:1.2rem">💳</div>
+        <div class="cc-child-row">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:.85rem">🔗</span>
+            <div>
+              <div style="font-size:.82rem;font-weight:600">${ch.name}</div>
+              <div style="font-size:.7rem;color:var(--text3)">บัตรเสริม · ยอดใช้สะสม</div>
+            </div>
+          </div>
+          <div style="font-family:var(--mono);font-size:.85rem;font-weight:700;color:var(--accent3)">฿${formatMoney(chSpent)}</div>
+        </div>
+      `;
+    }).join('');
+
+    const mainOwn = bal.perCard[mc.id] || 0;
+    const mainOwnRow = (children.length > 0 && mainOwn > 0) ? `
+      <div class="cc-main-own-row">
+        <div style="font-size:.8rem;color:var(--text2)">บัตรหลัก (${mc.name})</div>
+        <div style="font-family:var(--mono);font-size:.85rem;font-weight:700;color:var(--accent3)">฿${formatMoney(mainOwn)}</div>
+      </div>
+    ` : '';
+
+    // Only show if has any activity
+    if (bal.totalSpent === 0 && bal.totalPaid === 0) {
+      blocks.push(`
+        <div class="cc-block">
+          <div class="cc-block-header">
+            <div class="cc-block-left">
+              <div class="cc-block-icon">💳</div>
               <div>
-                <div style="font-weight:700;font-size:.92rem">${mc.name}</div>
-                <div style="font-size:.72rem;color:var(--text2);margin-top:1px">บัตรหลัก${mc.limit > 0 ? ` · วงเงิน ฿${formatMoney(mc.limit)}` : ''}</div>
+                <div class="cc-block-name">${mc.name}</div>
+                <div class="cc-block-sub">บัตรหลัก${mc.limit > 0 ? ` · วงเงิน ฿${formatMoney(mc.limit)}` : ''}</div>
               </div>
             </div>
-            <div style="text-align:right">
-              <div style="font-family:var(--mono);font-weight:700;font-size:1rem;color:var(--accent3)">฿${formatMoney(totalUsed)}</div>
-              ${remaining !== null ? `<div style="font-size:.7rem;color:var(--text2)">คงเหลือ ฿${formatMoney(remaining)}</div>` : ''}
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="cc-block-right">
+                <div class="cc-block-amount" style="color:var(--text3)">฿0.00</div>
+                <div class="cc-block-remaining">ยังไม่มียอด</div>
+              </div>
+              <button class="btn-pay-sm" onclick="showPayCardModal(${mc.id})">💳 จ่าย</button>
+            </div>
+          </div>
+        </div>
+      `);
+    } else {
+      blocks.push(`
+        <div class="cc-block">
+          <div class="cc-block-header">
+            <div class="cc-block-left">
+              <div class="cc-block-icon">💳</div>
+              <div>
+                <div class="cc-block-name">${mc.name}</div>
+                <div class="cc-block-sub">บัตรหลัก${mc.limit > 0 ? ` · วงเงิน ฿${formatMoney(mc.limit)}` : ''}</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px">
+              <div class="cc-block-right">
+                <div class="cc-block-amount">฿${formatMoney(bal.outstanding)}</div>
+                <div class="cc-block-remaining">${mc.limit > 0 ? `วงเงินคงเหลือ ฿${formatMoney(Math.max(0, mc.limit - bal.outstanding))}` : `ใช้สะสม ฿${formatMoney(bal.totalSpent)}`}</div>
+              </div>
+              <button class="btn-pay-sm" onclick="showPayCardModal(${mc.id})">💳 จ่าย</button>
             </div>
           </div>
           ${mc.limit > 0 ? `
-            <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:${children.length > 0 ? '10px' : '0'}">
-              <div style="height:100%;width:${pct.toFixed(1)}%;background:${pct > 80 ? 'var(--red)' : pct > 50 ? 'var(--yellow)' : 'var(--accent3)'};border-radius:3px;transition:width .5s"></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--text3);margin-top:2px;margin-bottom:${children.length > 0 ? '10px' : '0'}">
-              <span>ใช้ไป ${pct.toFixed(1)}%</span>
-              <span>${pct > 80 ? '⚠️ ใกล้เต็มวงเงิน' : ''}</span>
+            <div class="cc-limit-bar"><div class="cc-limit-fill" style="width:${bal.pct.toFixed(1)}%;background:${barColor}"></div></div>
+            <div class="cc-pct-row">
+              <span>ค้างชำระ ${bal.pct.toFixed(1)}% ของวงเงิน</span>
+              <span>${bal.pct > 80 ? '⚠️ ใกล้เต็มวงเงิน' : ''}</span>
             </div>
           ` : ''}
+          ${bal.totalPaid > 0 ? `<div style="font-size:.72rem;color:var(--green);margin-bottom:4px">✓ ชำระรวมแล้ว ฿${formatMoney(bal.totalPaid)} · ยอดค้าง ฿${formatMoney(bal.outstanding)}</div>` : ''}
           ${childRows}
-          ${(cardMap[mc.id] || 0) > 0 && children.length > 0 ? `
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-top:1px solid var(--border);margin-top:6px">
-              <div style="font-size:.8rem;color:var(--text2)">บัตรหลัก (${mc.name})</div>
-              <div style="font-family:var(--mono);font-size:.85rem;font-weight:700;color:var(--accent3)">฿${formatMoney(cardMap[mc.id] || 0)}</div>
-            </div>
-          ` : ''}
+          ${mainOwnRow}
         </div>
-      `;
-    });
-
-    // Cards with no main card mapping
-    const orphanSupp = suppCards.filter(s => !mainCards.find(m => m.id === s.mainCardId) && (cardMap[s.id] || 0) > 0);
-    const orphanRows = orphanSupp.map(s => `
-      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:38px;height:38px;border-radius:12px;background:rgba(244,114,182,.12);display:flex;align-items:center;justify-content:center;font-size:1.2rem">💳</div>
-          <div>
-            <div style="font-weight:700;font-size:.92rem">${s.name}</div>
-            <div style="font-size:.72rem;color:var(--text2)">บัตรเสริม</div>
-          </div>
-        </div>
-        <div style="font-family:var(--mono);font-weight:700;font-size:1rem;color:var(--accent3)">฿${formatMoney(cardMap[s.id] || 0)}</div>
-      </div>
-    `).join('');
-
-    // No credit card transactions for this period but cards exist
-    const hasAnyUsage = mainCards.some(mc => {
-      const children = suppCards.filter(s => s.mainCardId === mc.id);
-      return [mc, ...children].some(c => cardMap[c.id] > 0);
-    }) || orphanSupp.length > 0;
-
-    if (!hasAnyUsage) {
-      ccBreakdown.innerHTML = '<div style="color:var(--text3);font-size:.85rem;padding:8px 0">ไม่มีการใช้บัตรเครดิตในช่วงนี้</div>';
-    } else {
-      // Summary total row
-      const grandTotal = creditTxs.reduce((s, t) => s + t.amount, 0);
-      ccBreakdown.innerHTML = sections.join('') + orphanRows + `
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--border);margin-top:2px">
-          <div style="font-weight:700;font-size:.88rem">รวมบัตรเครดิตทั้งหมด</div>
-          <div style="font-family:var(--mono);font-weight:700;font-size:1rem;color:var(--red)">฿${formatMoney(grandTotal)}</div>
-        </div>
-      `;
+      `);
     }
   }
+
+  // Orphan supplementary (no linked main card)
+  for (const s of suppCards.filter(s => !mainCards.find(m => m.id === s.mainCardId))) {
+    const spent = allTxs.filter(t => t.type === 'expense' && t.payment === 'credit' && t.cardId === s.id).reduce((sum, t) => sum + t.amount, 0);
+    if (spent > 0) {
+      grandOutstanding += spent;
+      blocks.push(`
+        <div class="cc-block" style="display:flex;align-items:center;justify-content:space-between">
+          <div class="cc-block-left">
+            <div class="cc-block-icon">💳</div>
+            <div><div class="cc-block-name">${s.name}</div><div class="cc-block-sub">บัตรเสริม</div></div>
+          </div>
+          <div style="font-family:var(--mono);font-weight:700;font-size:1rem;color:var(--accent3)">฿${formatMoney(spent)}</div>
+        </div>
+      `);
+    }
+  }
+
+  if (blocks.length === 0) {
+    ccEl.innerHTML = '<div style="color:var(--text3);font-size:.85rem;padding:8px 0">ยังไม่มีรายการบัตรเครดิต</div>';
+  } else {
+    ccEl.innerHTML = blocks.join('') + `
+      <div class="cc-grand-total">
+        <div style="font-weight:700;font-size:.9rem">ยอดค้างชำระรวมทั้งหมด</div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:1.05rem;color:var(--red)">฿${formatMoney(grandOutstanding)}</div>
+      </div>
+    `;
+  }
+}
+
+// ============ PAY CREDIT CARD ============
+async function showPayCardModal(preSelectedId) {
+  const cards = await dbGetAll('cards');
+  const mainCards = cards.filter(c => c.type === 'main');
+  if (mainCards.length === 0) { showToast('ยังไม่มีบัตรหลัก'); return; }
+
+  const sel = document.getElementById('pay-card-id');
+  sel.innerHTML = mainCards.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  if (preSelectedId) sel.value = preSelectedId;
+
+  document.getElementById('pay-amount').value = '';
+  document.getElementById('pay-note').value = '';
+  document.getElementById('pay-date').value = toYMD(new Date());
+
+  await updatePayCardInfo();
+  openModal('modal-pay-card');
+}
+
+async function updatePayCardInfo() {
+  const mainCardId = parseInt(document.getElementById('pay-card-id').value);
+  if (!mainCardId) return;
+
+  const cards = await dbGetAll('cards');
+  const allTxs = await dbGetAll('transactions');
+  const allPayments = await dbGetAll('card_payments');
+  const mc = cards.find(c => c.id === mainCardId);
+  const suppCards = cards.filter(c => c.type === 'supplementary');
+  if (!mc) return;
+
+  const bal = calcCardBalance(mc, allTxs, allPayments, suppCards);
+
+  document.getElementById('pay-card-info').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <span style="font-weight:700">💳 ${mc.name}</span>
+      <span style="font-family:var(--mono);font-weight:700;color:var(--red)">ค้างชำระ ฿${formatMoney(bal.outstanding)}</span>
+    </div>
+    <div style="font-size:.72rem;display:flex;gap:12px;flex-wrap:wrap">
+      <span>ใช้สะสม ฿${formatMoney(bal.totalSpent)}</span>
+      <span style="color:var(--green)">ชำระแล้ว ฿${formatMoney(bal.totalPaid)}</span>
+      ${mc.limit > 0 ? `<span>วงเงินคงเหลือ ฿${formatMoney(Math.max(0, mc.limit - bal.outstanding))}</span>` : ''}
+    </div>
+  `;
+
+  // Payment history
+  const history = allPayments.filter(p => p.mainCardId === mainCardId).sort((a, b) => b.date.localeCompare(a.date));
+  const histEl = document.getElementById('pay-history-list');
+  if (history.length === 0) {
+    histEl.innerHTML = '<div style="color:var(--text3);font-size:.8rem;padding:6px 0">ยังไม่มีประวัติการจ่าย</div>';
+  } else {
+    histEl.innerHTML = history.slice(0, 8).map(p => `
+      <div class="pay-history-item">
+        <div>
+          <div style="font-weight:600">${p.note || 'จ่ายค่าบัตรเครดิต'}</div>
+          <div style="color:var(--text3);font-size:.72rem">${formatDate(p.date + 'T12:00:00')}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="font-family:var(--mono);font-weight:700;color:var(--green)">฿${formatMoney(p.amount)}</div>
+          <button onclick="deleteCardPayment(${p.id})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:.85rem;padding:2px 4px;border-radius:4px">✕</button>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+async function saveCardPayment() {
+  const mainCardId = parseInt(document.getElementById('pay-card-id').value);
+  const amount = parseFloat(document.getElementById('pay-amount').value);
+  const note = document.getElementById('pay-note').value.trim();
+  const date = document.getElementById('pay-date').value;
+  if (!amount || amount <= 0) { showToast('กรุณาใส่จำนวนที่จ่าย'); return; }
+  if (!date) { showToast('กรุณาเลือกวันที่'); return; }
+
+  await dbAdd('card_payments', { mainCardId, amount, note, date, createdAt: new Date().toISOString() });
+  showToast('บันทึกการจ่ายบัตรแล้ว ✓');
+  closeModal('modal-pay-card');
+  if (currentPage === 'dashboard') renderDashboard();
+  if (currentPage === 'transactions') renderTransactions();
+}
+
+async function deleteCardPayment(id) {
+  await dbDelete('card_payments', id);
+  showToast('ลบประวัติการจ่ายแล้ว');
+  await updatePayCardInfo();
+  if (currentPage === 'dashboard') renderDashboard();
 }
 
 // ============ TRANSACTIONS ============
 async function renderTransactions() {
-  const all = await dbGetAll('transactions');
+  const allTxs = await dbGetAll('transactions');
   const cats = await dbGetAll('categories');
   const cards = await dbGetAll('cards');
-  
-  let txs = [...all].sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id);
-  
-  if (filterState.from) txs = txs.filter(t => t.date >= filterState.from);
-  if (filterState.to) txs = txs.filter(t => t.date <= filterState.to);
-  if (filterState.type) txs = txs.filter(t => t.type === filterState.type);
-  if (filterState.payment) txs = txs.filter(t => t.payment === filterState.payment);
-  
+  const allPayments = await dbGetAll('card_payments');
+
+  // Merge transactions + card payments
+  let items = [
+    ...allTxs.map(t => ({ ...t, _kind: 'tx' })),
+    ...allPayments.map(p => ({ ...p, _kind: 'payment', type: 'card_payment', payment: 'bank', note: p.note || 'จ่ายค่าบัตรเครดิต' }))
+  ].sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id);
+
+  if (filterState.from) items = items.filter(t => t.date >= filterState.from);
+  if (filterState.to) items = items.filter(t => t.date <= filterState.to);
+  if (filterState.type === 'card_payment') items = items.filter(t => t._kind === 'payment');
+  else if (filterState.type) items = items.filter(t => t._kind === 'tx' && t.type === filterState.type);
+  if (filterState.payment) items = items.filter(t => t._kind === 'tx' && t.payment === filterState.payment);
+
   const el = document.getElementById('tx-list');
-  
-  if (txs.length === 0) {
+  if (items.length === 0) {
     el.innerHTML = `<div class="empty-state"><div class="emoji">📭</div><p>ยังไม่มีรายการ<br>กด + เพื่อเพิ่มรายการ</p></div>`;
     return;
   }
-  
-  // Group by date
+
   const groups = {};
-  txs.forEach(t => {
-    if (!groups[t.date]) groups[t.date] = [];
-    groups[t.date].push(t);
-  });
-  
-  el.innerHTML = Object.entries(groups).sort((a,b) => b[0].localeCompare(a[0])).map(([date, items]) => {
-    const dayTotal = items.reduce((s, t) => t.type === 'expense' ? s - t.amount : s + t.amount, 0);
-    const itemsHtml = items.map(t => {
+  items.forEach(t => { if (!groups[t.date]) groups[t.date] = []; groups[t.date].push(t); });
+
+  el.innerHTML = Object.entries(groups).sort((a,b) => b[0].localeCompare(a[0])).map(([date, dayItems]) => {
+    const dayNet = dayItems.reduce((s, t) => {
+      if (t._kind === 'payment') return s - t.amount;
+      return t.type === 'expense' ? s - t.amount : s + t.amount;
+    }, 0);
+
+    const itemsHtml = dayItems.map(t => {
+      if (t._kind === 'payment') {
+        const mc = cards.find(c => c.id === t.mainCardId);
+        return `
+          <div class="tx-item" onclick="showCardPaymentDetail(${t.id})" style="cursor:pointer">
+            <div class="tx-icon" style="background:rgba(74,222,128,.1)">🏦</div>
+            <div class="tx-info">
+              <div class="tx-name">${t.note}</div>
+              <div class="tx-meta">💳 จ่ายบัตร${mc ? ' ' + mc.name : ''}</div>
+            </div>
+            <div class="tx-amount" style="color:var(--accent2)">-฿${formatMoney(t.amount)}</div>
+          </div>
+        `;
+      }
       const cat = cats.find(c => c.id === t.categoryId) || { name: 'อื่นๆ', emoji: '📦', color: '#8892b0' };
       const payIcon = t.payment === 'cash' ? '💵' : t.payment === 'bank' ? '🏦' : '💳';
       const card = t.cardId ? cards.find(c => c.id === t.cardId) : null;
@@ -1062,12 +1168,12 @@ async function renderTransactions() {
         </div>
       `;
     }).join('');
-    
+
     return `
       <div class="card" style="margin-bottom:10px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
           <div style="font-size:.8rem;font-weight:700;color:var(--text2)">${formatDate(date + 'T12:00:00')}</div>
-          <div style="font-family:var(--mono);font-size:.8rem;color:${dayTotal >= 0 ? 'var(--green)' : 'var(--red)'};font-weight:700">${dayTotal >= 0 ? '+' : ''}฿${formatMoney(Math.abs(dayTotal))}</div>
+          <div style="font-family:var(--mono);font-size:.8rem;color:${dayNet >= 0 ? 'var(--green)' : 'var(--red)'};font-weight:700">${dayNet >= 0 ? '+' : ''}฿${formatMoney(Math.abs(dayNet))}</div>
         </div>
         ${itemsHtml}
       </div>
@@ -1080,14 +1186,12 @@ async function showTxDetail(id) {
   const t = all.find(tx => tx.id === id);
   if (!t) return;
   currentTxId = id;
-  
   const cats = await dbGetAll('categories');
   const cards = await dbGetAll('cards');
   const cat = cats.find(c => c.id === t.categoryId) || { name: 'อื่นๆ', emoji: '📦', color: '#8892b0' };
   const card = t.cardId ? cards.find(c => c.id === t.cardId) : null;
-  
   const payNames = { cash: '💵 เงินสด', bank: '🏦 Mobile Bank', credit: '💳 บัตรเครดิต' };
-  
+
   document.getElementById('tx-detail-content').innerHTML = `
     <div style="text-align:center;padding:20px 0">
       <div style="font-size:3rem;margin-bottom:8px">${cat.emoji}</div>
@@ -1102,6 +1206,37 @@ async function showTxDetail(id) {
       ${card ? `<div><div class="summary-label">บัตร</div><div style="font-weight:600;margin-top:4px">${card.name}</div></div>` : ''}
     </div>
   `;
+  document.getElementById('btn-delete-tx').onclick = deleteCurrentTx;
+  openModal('modal-tx-detail');
+}
+
+async function showCardPaymentDetail(id) {
+  const allPayments = await dbGetAll('card_payments');
+  const p = allPayments.find(x => x.id === id);
+  if (!p) return;
+  const cards = await dbGetAll('cards');
+  const mc = cards.find(c => c.id === p.mainCardId);
+
+  document.getElementById('tx-detail-content').innerHTML = `
+    <div style="text-align:center;padding:20px 0">
+      <div style="font-size:3rem;margin-bottom:8px">🏦</div>
+      <div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:var(--accent2)">-฿${formatMoney(p.amount)}</div>
+      <div style="color:var(--text2);margin-top:4px">${p.note || 'จ่ายค่าบัตรเครดิต'}</div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 0">
+      <div><div class="summary-label">บัตร</div><div style="font-weight:600;margin-top:4px">${mc ? mc.name : '-'}</div></div>
+      <div><div class="summary-label">วันที่</div><div style="font-weight:600;margin-top:4px">${formatDate(p.date + 'T12:00:00')}</div></div>
+      <div><div class="summary-label">ประเภท</div><div style="font-weight:600;margin-top:4px;color:var(--green)">จ่ายบัตรเครดิต</div></div>
+    </div>
+  `;
+  document.getElementById('btn-delete-tx').onclick = async () => {
+    await dbDelete('card_payments', id);
+    closeModal('modal-tx-detail');
+    showToast('ลบประวัติการจ่ายแล้ว');
+    renderTransactions();
+    renderDashboard();
+  };
   openModal('modal-tx-detail');
 }
 
@@ -1116,8 +1251,7 @@ async function deleteCurrentTx() {
 
 // ============ ADD TRANSACTION ============
 function showAddModal() {
-  selectedType = 'expense';
-  selectedCategory = null;
+  selectedType = 'expense'; selectedCategory = null;
   document.getElementById('tx-amount').value = '';
   document.getElementById('tx-note').value = '';
   document.getElementById('tx-date').value = toYMD(new Date());
@@ -1139,13 +1273,8 @@ function setType(t) {
 async function renderCategoryChips() {
   const cats = await dbGetAll('categories');
   const el = document.getElementById('category-chips');
-  if (cats.length === 0) {
-    el.innerHTML = '<div style="color:var(--text3);font-size:.8rem">ยังไม่มีหมวดหมู่ กรุณาเพิ่มในตั้งค่า</div>';
-    return;
-  }
-  el.innerHTML = cats.map(c => `
-    <button class="chip ${selectedCategory === c.id ? 'selected' : ''}" onclick="selectCategory(${c.id})">${c.emoji} ${c.name}</button>
-  `).join('');
+  if (cats.length === 0) { el.innerHTML = '<div style="color:var(--text3);font-size:.8rem">ยังไม่มีหมวดหมู่</div>'; return; }
+  el.innerHTML = cats.map(c => `<button class="chip ${selectedCategory === c.id ? 'selected' : ''}" onclick="selectCategory(${c.id})">${c.emoji} ${c.name}</button>`).join('');
 }
 
 function selectCategory(id) {
@@ -1157,8 +1286,7 @@ document.getElementById('tx-payment').addEventListener('change', async function(
   const group = document.getElementById('credit-card-select-group');
   if (this.value === 'credit') {
     const cards = await dbGetAll('cards');
-    const sel = document.getElementById('tx-card-id');
-    sel.innerHTML = cards.map(c => `<option value="${c.id}">${c.name}${c.type === 'supplementary' ? ' (เสริม)' : ''}</option>`).join('');
+    document.getElementById('tx-card-id').innerHTML = cards.map(c => `<option value="${c.id}">${c.name}${c.type === 'supplementary' ? ' (เสริม)' : ''}</option>`).join('');
     group.style.display = cards.length ? 'block' : 'none';
   } else {
     group.style.display = 'none';
@@ -1169,42 +1297,28 @@ async function saveTransaction() {
   const amount = parseFloat(document.getElementById('tx-amount').value);
   if (!amount || amount <= 0) { showToast('กรุณาใส่จำนวนเงิน'); return; }
   if (!selectedCategory) { showToast('กรุณาเลือกหมวดหมู่'); return; }
-  
   const payment = document.getElementById('tx-payment').value;
   const cardId = payment === 'credit' ? parseInt(document.getElementById('tx-card-id').value) || null : null;
-  
-  const tx = {
-    amount,
-    type: selectedType,
+  await dbAdd('transactions', {
+    amount, type: selectedType,
     note: document.getElementById('tx-note').value.trim(),
-    categoryId: selectedCategory,
-    payment,
-    cardId,
+    categoryId: selectedCategory, payment, cardId,
     date: document.getElementById('tx-date').value,
     createdAt: new Date().toISOString()
-  };
-  
-  await dbAdd('transactions', tx);
+  });
   closeModal('modal-add');
   showToast('บันทึกแล้ว ✓');
-  
   if (currentPage === 'dashboard') renderDashboard();
   if (currentPage === 'transactions') renderTransactions();
 }
 
 // ============ CATEGORIES ============
-async function showCategorySettings() {
-  await renderCategoryList();
-  openModal('modal-categories');
-}
+async function showCategorySettings() { await renderCategoryList(); openModal('modal-categories'); }
 
 async function renderCategoryList() {
   const cats = await dbGetAll('categories');
   const el = document.getElementById('category-list');
-  if (cats.length === 0) {
-    el.innerHTML = '<div class="empty-state"><p>ยังไม่มีหมวดหมู่</p></div>';
-    return;
-  }
+  if (cats.length === 0) { el.innerHTML = '<div class="empty-state"><p>ยังไม่มีหมวดหมู่</p></div>'; return; }
   el.innerHTML = cats.map(c => `
     <div class="tx-item">
       <div class="tx-icon" style="background:${c.color}22;font-size:1.3rem">${c.emoji}</div>
@@ -1217,14 +1331,11 @@ async function renderCategoryList() {
   `).join('');
 }
 
-function showAddCategoryModal(editId) {
-  document.getElementById('cat-name').value = '';
-  document.getElementById('cat-id').value = editId || '';
-  document.getElementById('cat-modal-title').textContent = editId ? 'แก้ไขหมวดหมู่' : 'เพิ่มหมวดหมู่';
-  selectedEmoji = '🛍';
-  selectedColor = '#6ee7b7';
-  renderEmojiPicker();
-  renderColorPicker();
+function showAddCategoryModal() {
+  document.getElementById('cat-name').value = ''; document.getElementById('cat-id').value = '';
+  document.getElementById('cat-modal-title').textContent = 'เพิ่มหมวดหมู่';
+  selectedEmoji = '🛍'; selectedColor = '#6ee7b7';
+  renderEmojiPicker(); renderColorPicker();
   openModal('modal-add-category');
 }
 
@@ -1232,97 +1343,60 @@ async function editCategory(id) {
   const cats = await dbGetAll('categories');
   const cat = cats.find(c => c.id === id);
   if (!cat) return;
-  document.getElementById('cat-name').value = cat.name;
-  document.getElementById('cat-id').value = id;
+  document.getElementById('cat-name').value = cat.name; document.getElementById('cat-id').value = id;
   document.getElementById('cat-modal-title').textContent = 'แก้ไขหมวดหมู่';
-  selectedEmoji = cat.emoji;
-  selectedColor = cat.color;
-  renderEmojiPicker();
-  renderColorPicker();
+  selectedEmoji = cat.emoji; selectedColor = cat.color;
+  renderEmojiPicker(); renderColorPicker();
   openModal('modal-add-category');
 }
 
-async function deleteCategory(id) {
-  await dbDelete('categories', id);
-  showToast('ลบหมวดหมู่แล้ว');
-  renderCategoryList();
-  renderSettingsInfo();
-}
+async function deleteCategory(id) { await dbDelete('categories', id); showToast('ลบหมวดหมู่แล้ว'); renderCategoryList(); renderSettingsInfo(); }
 
 async function saveCategory() {
   const name = document.getElementById('cat-name').value.trim();
   if (!name) { showToast('กรุณาใส่ชื่อหมวดหมู่'); return; }
   const editId = document.getElementById('cat-id').value;
   const cat = { name, emoji: selectedEmoji, color: selectedColor };
-  
-  if (editId) {
-    await dbPut('categories', { ...cat, id: parseInt(editId) });
-  } else {
-    await dbAdd('categories', cat);
-  }
-  
-  closeModal('modal-add-category');
-  showToast('บันทึกหมวดหมู่แล้ว ✓');
-  renderCategoryList();
-  renderSettingsInfo();
+  if (editId) await dbPut('categories', { ...cat, id: parseInt(editId) });
+  else await dbAdd('categories', cat);
+  closeModal('modal-add-category'); showToast('บันทึกหมวดหมู่แล้ว ✓');
+  renderCategoryList(); renderSettingsInfo();
 }
 
 function renderEmojiPicker() {
-  document.getElementById('emoji-picker').innerHTML = EMOJIS.map(e => `
-    <button class="emoji-btn ${selectedEmoji === e ? 'selected' : ''}" onclick="selectedEmoji='${e}';renderEmojiPicker()">${e}</button>
-  `).join('');
+  document.getElementById('emoji-picker').innerHTML = EMOJIS.map(e => `<button class="emoji-btn ${selectedEmoji === e ? 'selected' : ''}" onclick="selectedEmoji='${e}';renderEmojiPicker()">${e}</button>`).join('');
 }
-
 function renderColorPicker() {
-  document.getElementById('color-picker').innerHTML = COLORS.map(c => `
-    <div class="color-swatch ${selectedColor === c ? 'selected' : ''}" style="background:${c}" onclick="selectedColor='${c}';renderColorPicker()"></div>
-  `).join('');
+  document.getElementById('color-picker').innerHTML = COLORS.map(c => `<div class="color-swatch ${selectedColor === c ? 'selected' : ''}" style="background:${c}" onclick="selectedColor='${c}';renderColorPicker()"></div>`).join('');
 }
 
 // ============ CREDIT CARDS ============
-async function showCardSettings() {
-  await renderCardList();
-  openModal('modal-cards');
-}
+async function showCardSettings() { await renderCardList(); openModal('modal-cards'); }
 
 async function renderCardList() {
   const cards = await dbGetAll('cards');
   const el = document.getElementById('card-list');
-  if (cards.length === 0) {
-    el.innerHTML = '<div class="empty-state"><p>ยังไม่มีบัตรเครดิต</p></div>';
-    return;
-  }
-  
-  // Calculate usage per main card
-  const all = await dbGetAll('transactions');
-  const now = new Date();
-  const monthFrom = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-01`;
-  const lastDay = new Date(now.getFullYear(), now.getMonth()+1, 0);
-  const monthTo = toYMD(lastDay);
-  const monthTx = all.filter(t => t.date >= monthFrom && t.date <= monthTo && t.type === 'expense' && t.payment === 'credit');
-  
-  // Group cards
+  if (cards.length === 0) { el.innerHTML = '<div class="empty-state"><p>ยังไม่มีบัตรเครดิต</p></div>'; return; }
+  const allTxs = await dbGetAll('transactions');
+  const allPayments = await dbGetAll('card_payments');
   const mainCards = cards.filter(c => c.type === 'main');
   const suppCards = cards.filter(c => c.type === 'supplementary');
-  
-  el.innerHTML = mainCards.map(mc => {
-    const relatedCards = [mc, ...suppCards.filter(s => s.mainCardId === mc.id)];
-    const usage = monthTx.filter(t => relatedCards.some(c => c.id === t.cardId)).reduce((s, t) => s + t.amount, 0);
-    const pct = mc.limit > 0 ? Math.min((usage / mc.limit * 100), 100) : 0;
-    
+  let html = '';
+  for (const mc of mainCards) {
+    const bal = calcCardBalance(mc, allTxs, allPayments, suppCards);
+    const pct = mc.limit > 0 ? Math.min((bal.outstanding / mc.limit) * 100, 100) : 0;
     const suppHtml = suppCards.filter(s => s.mainCardId === mc.id).map(s => `
       <div style="padding:6px 0 0 12px;border-left:2px solid var(--border);margin-top:6px;margin-left:6px">
         <div style="font-size:.8rem;color:var(--text2);font-weight:600">🔗 ${s.name} <span style="font-size:.7rem">(บัตรเสริม)</span></div>
       </div>
     `).join('');
-    
-    return `
+    html += `
       <div class="credit-card-preview">
         <div style="display:flex;justify-content:space-between;align-items:start">
           <div>
             <div class="card-type-badge">บัตรหลัก</div>
             <div class="card-name">💳 ${mc.name}</div>
-            <div style="font-size:.75rem;color:var(--text2)">วงเงิน ฿${formatMoney(mc.limit)} · ใช้เดือนนี้ ฿${formatMoney(usage)}</div>
+            <div style="font-size:.75rem;color:var(--text2)">วงเงิน ฿${formatMoney(mc.limit)} · ค้างชำระ ฿${formatMoney(bal.outstanding)}</div>
           </div>
           <div style="display:flex;gap:6px">
             <button class="btn btn-sm" onclick="editCard(${mc.id})">✏️</button>
@@ -1333,7 +1407,8 @@ async function renderCardList() {
         ${suppHtml}
       </div>
     `;
-  }).join('') + suppCards.filter(s => !mainCards.find(m => m.id === s.mainCardId)).map(s => `
+  }
+  html += suppCards.filter(s => !mainCards.find(m => m.id === s.mainCardId)).map(s => `
     <div class="credit-card-preview">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div><div class="card-type-badge" style="color:var(--accent3)">บัตรเสริม</div><div class="card-name">💳 ${s.name}</div></div>
@@ -1344,27 +1419,23 @@ async function renderCardList() {
       </div>
     </div>
   `).join('');
+  el.innerHTML = html;
 }
 
 async function showAddCardModal() {
-  document.getElementById('card-name').value = '';
-  document.getElementById('card-limit').value = '';
-  document.getElementById('card-type').value = 'main';
-  document.getElementById('card-id').value = '';
+  document.getElementById('card-name').value = ''; document.getElementById('card-limit').value = '';
+  document.getElementById('card-type').value = 'main'; document.getElementById('card-id').value = '';
   document.getElementById('card-modal-title').textContent = 'เพิ่มบัตรเครดิต';
   document.getElementById('main-card-select-group').style.display = 'none';
-  await loadMainCardsSelect();
-  openModal('modal-add-card');
+  await loadMainCardsSelect(); openModal('modal-add-card');
 }
 
 async function editCard(id) {
   const cards = await dbGetAll('cards');
   const card = cards.find(c => c.id === id);
   if (!card) return;
-  document.getElementById('card-name').value = card.name;
-  document.getElementById('card-limit').value = card.limit || '';
-  document.getElementById('card-type').value = card.type;
-  document.getElementById('card-id').value = id;
+  document.getElementById('card-name').value = card.name; document.getElementById('card-limit').value = card.limit || '';
+  document.getElementById('card-type').value = card.type; document.getElementById('card-id').value = id;
   document.getElementById('card-modal-title').textContent = 'แก้ไขบัตรเครดิต';
   await loadMainCardsSelect();
   if (card.type === 'supplementary') {
@@ -1376,8 +1447,7 @@ async function editCard(id) {
 
 async function loadMainCardsSelect() {
   const cards = await dbGetAll('cards');
-  const mainCards = cards.filter(c => c.type === 'main');
-  document.getElementById('card-main-id').innerHTML = mainCards.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  document.getElementById('card-main-id').innerHTML = cards.filter(c => c.type === 'main').map(c => `<option value="${c.id}">${c.name}</option>`).join('');
 }
 
 function toggleSupplementaryFields() {
@@ -1389,31 +1459,18 @@ function toggleSupplementaryFields() {
 async function saveCard() {
   const name = document.getElementById('card-name').value.trim();
   if (!name) { showToast('กรุณาใส่ชื่อบัตร'); return; }
-  
   const type = document.getElementById('card-type').value;
   const limit = type === 'main' ? (parseFloat(document.getElementById('card-limit').value) || 0) : 0;
   const mainCardId = type === 'supplementary' ? (parseInt(document.getElementById('card-main-id').value) || null) : null;
   const editId = document.getElementById('card-id').value;
-  
   const card = { name, type, limit, mainCardId };
-  if (editId) {
-    await dbPut('cards', { ...card, id: parseInt(editId) });
-  } else {
-    await dbAdd('cards', card);
-  }
-  
-  closeModal('modal-add-card');
-  showToast('บันทึกบัตรแล้ว ✓');
-  renderCardList();
-  renderSettingsInfo();
+  if (editId) await dbPut('cards', { ...card, id: parseInt(editId) });
+  else await dbAdd('cards', card);
+  closeModal('modal-add-card'); showToast('บันทึกบัตรแล้ว ✓');
+  renderCardList(); renderSettingsInfo();
 }
 
-async function deleteCard(id) {
-  await dbDelete('cards', id);
-  showToast('ลบบัตรแล้ว');
-  renderCardList();
-  renderSettingsInfo();
-}
+async function deleteCard(id) { await dbDelete('cards', id); showToast('ลบบัตรแล้ว'); renderCardList(); renderSettingsInfo(); }
 
 // ============ SETTINGS ============
 async function renderSettingsInfo() {
@@ -1431,7 +1488,6 @@ function showFilterModal() {
   document.getElementById('filter-payment').value = filterState.payment || '';
   openModal('modal-filter');
 }
-
 function applyFilter() {
   filterState = {
     from: document.getElementById('filter-from').value,
@@ -1442,114 +1498,63 @@ function applyFilter() {
   closeModal('modal-filter');
   renderTransactions();
 }
-
-function clearFilter() {
-  filterState = {};
-  closeModal('modal-filter');
-  renderTransactions();
-}
+function clearFilter() { filterState = {}; closeModal('modal-filter'); renderTransactions(); }
 
 // ============ EXPORT/IMPORT ============
 async function exportData() {
   const txs = await dbGetAll('transactions');
   const cats = await dbGetAll('categories');
   const cards = await dbGetAll('cards');
-  const data = JSON.stringify({ transactions: txs, categories: cats, cards, exportedAt: new Date().toISOString() }, null, 2);
+  const payments = await dbGetAll('card_payments');
+  const data = JSON.stringify({ transactions: txs, categories: cats, cards, card_payments: payments, exportedAt: new Date().toISOString() }, null, 2);
   const blob = new Blob([data], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `money-log-${toYMD(new Date())}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('Export สำเร็จ ✓');
+  const a = document.createElement('a'); a.href = url; a.download = `money-log-${toYMD(new Date())}.json`; a.click();
+  URL.revokeObjectURL(url); showToast('Export สำเร็จ ✓');
 }
 
 function importData() {
   const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json';
+  input.type = 'file'; input.accept = '.json';
   input.onchange = async e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const text = await file.text();
+    const file = e.target.files[0]; if (!file) return;
     try {
-      const data = JSON.parse(text);
-      if (data.categories) {
-        await dbClear('categories');
-        for (const c of data.categories) await dbPut('categories', c);
-      }
-      if (data.cards) {
-        await dbClear('cards');
-        for (const c of data.cards) await dbPut('cards', c);
-      }
-      if (data.transactions) {
-        await dbClear('transactions');
-        for (const t of data.transactions) await dbPut('transactions', t);
-      }
+      const data = JSON.parse(await file.text());
+      if (data.categories) { await dbClear('categories'); for (const c of data.categories) await dbPut('categories', c); }
+      if (data.cards) { await dbClear('cards'); for (const c of data.cards) await dbPut('cards', c); }
+      if (data.transactions) { await dbClear('transactions'); for (const t of data.transactions) await dbPut('transactions', t); }
+      if (data.card_payments) { await dbClear('card_payments'); for (const p of data.card_payments) await dbPut('card_payments', p); }
       showToast(`Import สำเร็จ ✓ (${data.transactions?.length || 0} รายการ)`);
       renderSettingsInfo();
       if (currentPage === 'dashboard') renderDashboard();
-    } catch (err) {
-      showToast('ไฟล์ไม่ถูกต้อง');
-    }
+    } catch { showToast('ไฟล์ไม่ถูกต้อง'); }
   };
   input.click();
 }
 
-// ============ PWA MANIFEST ============
+// ============ PWA ============
 function injectManifest() {
-  const manifest = {
-    name: 'Money Log',
-    short_name: 'MoneyLog',
-    description: 'บันทึกรายรับรายจ่าย',
-    start_url: '.',
-    display: 'standalone',
-    background_color: '#0a0c12',
-    theme_color: '#0a0c12',
-    icons: [
-      { src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0c12'/><text y='.9em' font-size='70' x='15'>💸</text></svg>", sizes: '192x192', type: 'image/svg+xml' }
-    ]
-  };
-  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  document.getElementById('manifest-link').href = url;
+  const m = { name: 'Money Log', short_name: 'MoneyLog', description: 'บันทึกรายรับรายจ่าย', start_url: '.', display: 'standalone', background_color: '#0a0c12', theme_color: '#0a0c12', icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0c12'/><text y='.9em' font-size='70' x='15'>💸</text></svg>", sizes: '192x192', type: 'image/svg+xml' }] };
+  document.getElementById('manifest-link').href = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/json' }));
 }
 
 // ============ INIT ============
 async function init() {
   await openDB();
-  
-  // Seed default categories if empty
   const cats = await dbGetAll('categories');
-  if (cats.length === 0) {
-    for (const c of DEFAULT_CATEGORIES) await dbAdd('categories', c);
-  }
-  
+  if (cats.length === 0) for (const c of DEFAULT_CATEGORIES) await dbAdd('categories', c);
   injectManifest();
   renderPeriodSelector();
   await renderDashboard();
   await renderSettingsInfo();
-  
-  // Register service worker
   if ('serviceWorker' in navigator) {
-    const sw = `
-      self.addEventListener('install', e => self.skipWaiting());
-      self.addEventListener('activate', e => clients.claim());
-      self.addEventListener('fetch', e => e.respondWith(caches.open('money-log-v1').then(c => c.match(e.request).then(r => r || fetch(e.request).catch(() => new Response('', {status: 503}))))));
-    `;
-    const blob = new Blob([sw], { type: 'application/javascript' });
-    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+    const sw = `self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>clients.claim());self.addEventListener('fetch',e=>e.respondWith(caches.open('money-log-v2').then(c=>c.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response('',{status:503}))))));`;
+    navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw], { type: 'application/javascript' }))).catch(() => {});
   }
 }
 
-// Close modal on overlay click
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) {
-      closeModal(overlay.id);
-    }
-  });
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(overlay.id); });
 });
 
 init();
