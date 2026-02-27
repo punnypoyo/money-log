@@ -959,11 +959,16 @@ async function renderDashboard() {
     } else {
       blocks.push(`
         <div class="cc-block">
+            <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="cc-block-icon">💳</div>
+                <div class="cc-block-name">${mc.name}</div>
+              </div>
+              <button class="btn-pay-sm" onclick="showPayCardModal(${mc.id})">💳 จ่าย</button>
+            </div>
           <div class="cc-block-header">
             <div class="cc-block-left">
-              <div class="cc-block-icon">💳</div>
               <div>
-                <div class="cc-block-name">${mc.name}</div>
                 <div class="cc-block-sub">บัตรหลัก${mc.limit > 0 ? ` · วงเงิน ฿${formatMoney(mc.limit)}` : ''}</div>
               </div>
             </div>
@@ -972,7 +977,6 @@ async function renderDashboard() {
                 <div class="cc-block-amount">฿${formatMoney(bal.outstanding)}</div>
                 <div class="cc-block-remaining">${mc.limit > 0 ? `วงเงินคงเหลือ ฿${formatMoney(Math.max(0, mc.limit - bal.outstanding))}` : `ใช้สะสม ฿${formatMoney(bal.totalSpent)}`}</div>
               </div>
-              <button class="btn-pay-sm" onclick="showPayCardModal(${mc.id})">💳 จ่าย</button>
             </div>
           </div>
           ${mc.limit > 0 ? `
