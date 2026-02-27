@@ -36,6 +36,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+  body.no-scroll { overflow: hidden; }
   
   /* Layout */
   #app { display: flex; flex-direction: column; min-height: 100vh; }
@@ -415,7 +416,7 @@
     </div>
     <div class="form-group" style="width: 100%;">
       <label class="form-label">Date</label>
-      <input type="date" class="form-input" id="tx-date">
+      <input type="date" class="form-input" style="width: 100%;" id="tx-date">
     </div>
     <div class="modal-footer">
       <button class="btn btn-sm" onclick="closeModal('modal-add')">ยกเลิก</button>
@@ -686,10 +687,17 @@ function showToast(msg) {
 
 function openModal(id) {
   document.getElementById(id).classList.add('open');
+  document.body.classList.add('no-scroll');
 }
 
 function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
+  const el = document.getElementById(id);
+  if (el) el.classList.remove('open');
+  // Remove no-scroll only when no other modal is open
+  const anyOpen = document.querySelector('.modal-overlay.open');
+  if (!anyOpen) {
+    document.body.classList.remove('no-scroll');
+  }
 }
 
 // ============ NAVIGATION ============
@@ -1405,7 +1413,9 @@ async function init() {
 // Close modal on overlay click
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
   overlay.addEventListener('click', e => {
-    if (e.target === overlay) overlay.classList.remove('open');
+    if (e.target === overlay) {
+      closeModal(overlay.id);
+    }
   });
 });
 
