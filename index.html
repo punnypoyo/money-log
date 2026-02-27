@@ -965,7 +965,7 @@ async function renderDashboard() {
             <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:${children.length > 0 ? '10px' : '0'}">
               <div style="height:100%;width:${pct.toFixed(1)}%;background:${pct > 80 ? 'var(--red)' : pct > 50 ? 'var(--yellow)' : 'var(--accent3)'};border-radius:3px;transition:width .5s"></div>
             </div>
-            <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--text3);margin-top:-6px;margin-bottom:${children.length > 0 ? '10px' : '0'}">
+            <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--text3);margin-top:2px;margin-bottom:${children.length > 0 ? '10px' : '0'}">
               <span>ใช้ไป ${pct.toFixed(1)}%</span>
               <span>${pct > 80 ? '⚠️ ใกล้เต็มวงเงิน' : ''}</span>
             </div>
