@@ -69,7 +69,7 @@
   .nav-item.active { color: var(--accent); }
   .nav-item svg { width: 22px; height: 22px; }
   
-  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--card-r); padding: 6px; }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--card-r); padding: 8px; }
   .card + .card { margin-top: 12px; }
   .card-title { font-size: 0.75rem; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
   
@@ -223,14 +223,12 @@
   }
   .report-view-toggle input { accent-color: var(--accent); }
   .report-summary { display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
-  .report-row {
-    display: grid; grid-template-columns: 1.2fr .9fr .9fr .9fr; gap: 8px; align-items: center;
-    padding: 10px 0; border-bottom: 1px solid var(--border);
-  }
-  .report-row:last-child { border-bottom: none; }
-  .report-head { font-size: .72rem; color: var(--text2); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
-  .report-name { font-size: .88rem; font-weight: 600; }
-  .report-val { font-family: var(--mono); font-size: .82rem; text-align: right; }
+  .report-cards { display: grid; gap: 10px; }
+  .report-item-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+  .report-item-title { font-size: .95rem; font-weight: 700; margin-bottom: 10px; }
+  .report-item-line { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; font-size: .84rem; }
+  .report-item-label { color: var(--text2); font-weight: 600; }
+  .report-item-val { font-family: var(--mono); font-size: .84rem; }
 
   .divider { height: 1px; background: var(--border); margin: 12px 0; }
   
@@ -326,11 +324,11 @@
       <div class="card" style="margin-bottom:12px">
         <div class="card-title">Report</div>
         <div class="report-filters">
-          <div class="form-group">
+          <div class="form-group full">
             <label class="form-label">เริ่มต้น</label>
             <input type="date" class="form-input" id="report-from">
           </div>
-          <div class="form-group">
+          <div class="form-group full">
             <label class="form-label">สิ้นสุด</label>
             <input type="date" class="form-input" id="report-to">
           </div>
@@ -1665,40 +1663,49 @@ async function renderReport() {
     return;
   }
 
-  const header = `
-    <div class="report-row report-head">
-      <div>${reportState.view === 'category' ? 'หมวดหมู่' : 'ช่องทาง'}</div>
-      <div style="text-align:right">รายรับ</div>
-      <div style="text-align:right">รายจ่าย</div>
-      <div style="text-align:right">สุทธิ</div>
-    </div>
-  `;
-
   const body = rows.map(r => {
     const net = r.income - r.expense;
     if (reportState.view === 'category') {
       const cat = cats.find(c => c.id === r.categoryId) || { emoji: '📦', name: 'อื่นๆ', color: '#8892b0' };
       return `
-        <div class="report-row">
-          <div class="report-name">${cat.emoji} ${cat.name}</div>
-          <div class="report-val" style="color:var(--green)">฿${formatMoney(r.income)}</div>
-          <div class="report-val" style="color:var(--red)">฿${formatMoney(r.expense)}</div>
-          <div class="report-val" style="color:${net >= 0 ? 'var(--green)' : 'var(--red)'}">฿${formatMoney(net)}</div>
+        <div class="report-item-card">
+          <div class="report-item-title">${cat.emoji} ${cat.name}</div>
+          <div class="report-item-line">
+            <span class="report-item-label">• รายรับ</span>
+            <span class="report-item-val" style="color:var(--green)">฿${formatMoney(r.income)}</span>
+          </div>
+          <div class="report-item-line">
+            <span class="report-item-label">• รายจ่าย</span>
+            <span class="report-item-val" style="color:var(--red)">฿${formatMoney(r.expense)}</span>
+          </div>
+          <div class="report-item-line">
+            <span class="report-item-label">• สุทธิ</span>
+            <span class="report-item-val" style="color:${net >= 0 ? 'var(--green)' : 'var(--red)'}">฿${formatMoney(net)}</span>
+          </div>
         </div>
       `;
     }
     const pm = getPaymentMeta(r.payment);
     return `
-      <div class="report-row">
-        <div class="report-name" style="color:${pm.color}">${pm.label}</div>
-        <div class="report-val" style="color:var(--green)">฿${formatMoney(r.income)}</div>
-        <div class="report-val" style="color:var(--red)">฿${formatMoney(r.expense)}</div>
-        <div class="report-val" style="color:${net >= 0 ? 'var(--green)' : 'var(--red)'}">฿${formatMoney(net)}</div>
+      <div class="report-item-card">
+        <div class="report-item-title" style="color:${pm.color}">${pm.label}</div>
+        <div class="report-item-line">
+          <span class="report-item-label">• รายรับ</span>
+          <span class="report-item-val" style="color:var(--green)">฿${formatMoney(r.income)}</span>
+        </div>
+        <div class="report-item-line">
+          <span class="report-item-label">• รายจ่าย</span>
+          <span class="report-item-val" style="color:var(--red)">฿${formatMoney(r.expense)}</span>
+        </div>
+        <div class="report-item-line">
+          <span class="report-item-label">• สุทธิ</span>
+          <span class="report-item-val" style="color:${net >= 0 ? 'var(--green)' : 'var(--red)'}">฿${formatMoney(net)}</span>
+        </div>
       </div>
     `;
   }).join('');
 
-  resultEl.innerHTML = header + body;
+  resultEl.innerHTML = `<div class="report-cards">${body}</div>`;
 }
 
 // ============ EXPORT/IMPORT ============
