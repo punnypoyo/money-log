@@ -69,7 +69,7 @@
   .nav-item.active { color: var(--accent); }
   .nav-item svg { width: 22px; height: 22px; }
   
-  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--card-r); padding: 16px; }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--card-r); padding: 6px; }
   .card + .card { margin-top: 12px; }
   .card-title { font-size: 0.75rem; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
   
@@ -213,7 +213,7 @@
   .empty-state .emoji { font-size: 3rem; margin-bottom: 12px; }
   .empty-state p { font-size: 0.9rem; }
 
-  .report-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .report-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
   .report-filters .full { grid-column: 1 / -1; }
   .report-view-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
   .report-view-toggle label {
@@ -222,7 +222,7 @@
     background: var(--bg3); color: var(--text2); font-weight: 600; font-size: .85rem; cursor: pointer;
   }
   .report-view-toggle input { accent-color: var(--accent); }
-  .report-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+  .report-summary { display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
   .report-row {
     display: grid; grid-template-columns: 1.2fr .9fr .9fr .9fr; gap: 8px; align-items: center;
     padding: 10px 0; border-bottom: 1px solid var(--border);
@@ -327,11 +327,11 @@
         <div class="card-title">Report</div>
         <div class="report-filters">
           <div class="form-group">
-            <label class="form-label">Start Date</label>
+            <label class="form-label">เริ่มต้น</label>
             <input type="date" class="form-input" id="report-from">
           </div>
           <div class="form-group">
-            <label class="form-label">End Date</label>
+            <label class="form-label">สิ้นสุด</label>
             <input type="date" class="form-input" id="report-to">
           </div>
           <div class="form-group full">
