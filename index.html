@@ -213,6 +213,25 @@
   .empty-state .emoji { font-size: 3rem; margin-bottom: 12px; }
   .empty-state p { font-size: 0.9rem; }
 
+  .report-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .report-filters .full { grid-column: 1 / -1; }
+  .report-view-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
+  .report-view-toggle label {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 10px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--bg3); color: var(--text2); font-weight: 600; font-size: .85rem; cursor: pointer;
+  }
+  .report-view-toggle input { accent-color: var(--accent); }
+  .report-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+  .report-row {
+    display: grid; grid-template-columns: 1.2fr .9fr .9fr .9fr; gap: 8px; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .report-row:last-child { border-bottom: none; }
+  .report-head { font-size: .72rem; color: var(--text2); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .report-name { font-size: .88rem; font-weight: 600; }
+  .report-val { font-family: var(--mono); font-size: .82rem; text-align: right; }
+
   .divider { height: 1px; background: var(--border); margin: 12px 0; }
   
   .credit-card-preview {
@@ -302,6 +321,48 @@
       </div>
       <div id="tx-list"></div>
     </div>
+
+    <div id="page-report" class="page">
+      <div class="card" style="margin-bottom:12px">
+        <div class="card-title">Report</div>
+        <div class="report-filters">
+          <div class="form-group">
+            <label class="form-label">Start Date</label>
+            <input type="date" class="form-input" id="report-from">
+          </div>
+          <div class="form-group">
+            <label class="form-label">End Date</label>
+            <input type="date" class="form-input" id="report-to">
+          </div>
+          <div class="form-group full">
+            <label class="form-label">ช่องทางชำระเงิน</label>
+            <select class="form-input" id="report-payment">
+              <option value="">ทั้งหมด</option>
+              <option value="cash">💵 เงินสด</option>
+              <option value="bank">🏦 Mobile Bank</option>
+              <option value="credit">💳 บัตรเครดิต</option>
+            </select>
+          </div>
+          <div class="form-group full" id="report-card-group" style="display:none">
+            <label class="form-label">บัตรเครดิต</label>
+            <select class="form-input" id="report-card"></select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">หมวดหมู่</label>
+            <select class="form-input" id="report-category"></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="report-view-toggle">
+          <label><input type="radio" name="report-view" value="payment" checked> ตามช่องทางชำระเงิน</label>
+          <label><input type="radio" name="report-view" value="category"> ตามหมวดหมู่</label>
+        </div>
+        <div class="report-summary" id="report-summary"></div>
+        <div id="report-result"></div>
+      </div>
+    </div>
     
     <div id="page-settings" class="page">
       <div class="card">
@@ -353,6 +414,10 @@
     <button class="nav-item" onclick="showPage('transactions')" id="nav-transactions">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
       รายการ
+    </button>
+    <button class="nav-item" onclick="showPage('report')" id="nav-report">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Report
     </button>
     <button class="nav-item" onclick="showPage('settings')" id="nav-settings">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
@@ -661,6 +726,7 @@ let currentTxId = null;
 let filterState = {};
 let pieChartInstance = null;
 let barChartInstance = null;
+let reportState = { from: '', to: '', payment: '', cardId: '', categoryId: '', view: 'payment' };
 
 const EMOJIS = ['🛍','🍔','🚗','🏠','💊','🎮','✈️','👗','🎓','💼','🛒','☕','🍕','🍜','🎵','📱','💻','🎬','🏋️','🐾','🌿','🎁','💡','🚿','🍺','💰','💸','📚','🔑','🎯','🏥','⛽','🌮','🍰','💈','🎪','🛴','🚌','🏊','🎨'];
 const COLORS = ['#6ee7b7','#38bdf8','#f472b6','#fb923c','#a78bfa','#fbbf24','#4ade80','#f87171','#e879f9','#22d3ee','#84cc16','#f97316','#818cf8','#f43f5e','#10b981','#0ea5e9'];
@@ -711,6 +777,7 @@ function showPage(page) {
   document.getElementById('fab').style.display = page === 'settings' ? 'none' : 'flex';
   if (page === 'dashboard') renderDashboard();
   if (page === 'transactions') renderTransactions();
+  if (page === 'report') renderReport();
   if (page === 'settings') renderSettingsInfo();
 }
 
@@ -1100,6 +1167,7 @@ async function saveCardPayment() {
   closeModal('modal-pay-card');
   if (currentPage === 'dashboard') renderDashboard();
   if (currentPage === 'transactions') renderTransactions();
+  if (currentPage === 'report') renderReport();
 }
 
 async function deleteCardPayment(id) {
@@ -1107,6 +1175,7 @@ async function deleteCardPayment(id) {
   showToast('ลบประวัติการจ่ายแล้ว');
   await updatePayCardInfo();
   if (currentPage === 'dashboard') renderDashboard();
+  if (currentPage === 'report') renderReport();
 }
 
 // ============ TRANSACTIONS ============
@@ -1240,6 +1309,7 @@ async function showCardPaymentDetail(id) {
     showToast('ลบประวัติการจ่ายแล้ว');
     renderTransactions();
     renderDashboard();
+    if (currentPage === 'report') renderReport();
   };
   openModal('modal-tx-detail');
 }
@@ -1251,6 +1321,7 @@ async function deleteCurrentTx() {
   showToast('ลบรายการแล้ว');
   renderTransactions();
   if (currentPage === 'dashboard') renderDashboard();
+  if (currentPage === 'report') renderReport();
 }
 
 // ============ ADD TRANSACTION ============
@@ -1261,16 +1332,33 @@ function showAddModal() {
   document.getElementById('tx-date').value = toYMD(new Date());
   document.getElementById('tx-payment').value = 'cash';
   document.getElementById('credit-card-select-group').style.display = 'none';
+  updateTxPaymentOptionsByType();
   renderCategoryChips();
   document.getElementById('type-expense').classList.add('active');
   document.getElementById('type-income').classList.remove('active');
   openModal('modal-add');
 }
 
+function updateTxPaymentOptionsByType() {
+  const paymentEl = document.getElementById('tx-payment');
+  const creditOption = paymentEl.querySelector('option[value="credit"]');
+  if (!creditOption) return;
+
+  const isIncome = selectedType === 'income';
+  creditOption.hidden = isIncome;
+  creditOption.disabled = isIncome;
+
+  if (isIncome && paymentEl.value === 'credit') {
+    paymentEl.value = 'cash';
+  }
+  paymentEl.dispatchEvent(new Event('change'));
+}
+
 function setType(t) {
   selectedType = t;
   document.getElementById('type-expense').classList.toggle('active', t === 'expense');
   document.getElementById('type-income').classList.toggle('active', t === 'income');
+  updateTxPaymentOptionsByType();
   renderCategoryChips();
 }
 
@@ -1314,6 +1402,7 @@ async function saveTransaction() {
   showToast('บันทึกแล้ว ✓');
   if (currentPage === 'dashboard') renderDashboard();
   if (currentPage === 'transactions') renderTransactions();
+  if (currentPage === 'report') renderReport();
 }
 
 // ============ CATEGORIES ============
@@ -1354,7 +1443,7 @@ async function editCategory(id) {
   openModal('modal-add-category');
 }
 
-async function deleteCategory(id) { await dbDelete('categories', id); showToast('ลบหมวดหมู่แล้ว'); renderCategoryList(); renderSettingsInfo(); }
+async function deleteCategory(id) { await dbDelete('categories', id); showToast('ลบหมวดหมู่แล้ว'); renderCategoryList(); renderSettingsInfo(); if (currentPage === 'report') renderReport(); }
 
 async function saveCategory() {
   const name = document.getElementById('cat-name').value.trim();
@@ -1365,6 +1454,7 @@ async function saveCategory() {
   else await dbAdd('categories', cat);
   closeModal('modal-add-category'); showToast('บันทึกหมวดหมู่แล้ว ✓');
   renderCategoryList(); renderSettingsInfo();
+  if (currentPage === 'report') renderReport();
 }
 
 function renderEmojiPicker() {
@@ -1472,9 +1562,10 @@ async function saveCard() {
   else await dbAdd('cards', card);
   closeModal('modal-add-card'); showToast('บันทึกบัตรแล้ว ✓');
   renderCardList(); renderSettingsInfo();
+  if (currentPage === 'report') renderReport();
 }
 
-async function deleteCard(id) { await dbDelete('cards', id); showToast('ลบบัตรแล้ว'); renderCardList(); renderSettingsInfo(); }
+async function deleteCard(id) { await dbDelete('cards', id); showToast('ลบบัตรแล้ว'); renderCardList(); renderSettingsInfo(); if (currentPage === 'report') renderReport(); }
 
 // ============ SETTINGS ============
 async function renderSettingsInfo() {
@@ -1504,6 +1595,112 @@ function applyFilter() {
 }
 function clearFilter() { filterState = {}; closeModal('modal-filter'); renderTransactions(); }
 
+// ============ REPORT ============
+function getPaymentMeta(payment) {
+  if (payment === 'cash') return { label: '💵 เงินสด', color: 'var(--yellow)' };
+  if (payment === 'bank') return { label: '🏦 Mobile Bank', color: 'var(--accent2)' };
+  return { label: '💳 บัตรเครดิต', color: 'var(--accent3)' };
+}
+
+function buildSelectOptions(options, selectedValue) {
+  return options.map(opt => `<option value="${opt.value}" ${String(opt.value) === String(selectedValue) ? 'selected' : ''}>${opt.label}</option>`).join('');
+}
+
+async function renderReport() {
+  const today = toYMD(new Date());
+  if (!reportState.from) reportState.from = today;
+  if (!reportState.to) reportState.to = today;
+
+  const fromEl = document.getElementById('report-from');
+  const toEl = document.getElementById('report-to');
+  const paymentEl = document.getElementById('report-payment');
+  const cardGroupEl = document.getElementById('report-card-group');
+  const cardEl = document.getElementById('report-card');
+  const categoryEl = document.getElementById('report-category');
+
+  fromEl.value = reportState.from;
+  toEl.value = reportState.to;
+  paymentEl.value = reportState.payment;
+
+  const cats = await dbGetAll('categories');
+  const cards = await dbGetAll('cards');
+  const txs = await dbGetAll('transactions');
+
+  const cardOptions = [{ value: '', label: 'ทุกบัตร' }, ...cards.map(c => ({ value: String(c.id), label: `${c.name}${c.type === 'supplementary' ? ' (เสริม)' : ' (หลัก)'}` }))];
+  cardEl.innerHTML = buildSelectOptions(cardOptions, reportState.cardId);
+
+  const categoryOptions = [{ value: '', label: 'ทั้งหมด' }, ...cats.map(c => ({ value: String(c.id), label: `${c.emoji} ${c.name}` }))];
+  categoryEl.innerHTML = buildSelectOptions(categoryOptions, reportState.categoryId);
+
+  const isCredit = reportState.payment === 'credit';
+  cardGroupEl.style.display = isCredit ? 'block' : 'none';
+  if (!isCredit) reportState.cardId = '';
+
+  let filtered = txs.filter(t => t.date >= reportState.from && t.date <= reportState.to);
+  if (reportState.payment) filtered = filtered.filter(t => t.payment === reportState.payment);
+  if (reportState.categoryId) filtered = filtered.filter(t => String(t.categoryId) === String(reportState.categoryId));
+  if (isCredit && reportState.cardId) filtered = filtered.filter(t => String(t.cardId) === String(reportState.cardId));
+
+  const totalInc = filtered.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+  const totalExp = filtered.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
+  document.getElementById('report-summary').innerHTML = `
+    <div class="summary-card"><div class="summary-label">รายรับ</div><div class="summary-value income">฿${formatMoney(totalInc)}</div></div>
+    <div class="summary-card"><div class="summary-label">รายจ่าย</div><div class="summary-value expense">฿${formatMoney(totalExp)}</div></div>
+    <div class="summary-card"><div class="summary-label">สุทธิ</div><div class="summary-value neutral">฿${formatMoney(totalInc - totalExp)}</div></div>
+  `;
+
+  const groups = {};
+  filtered.forEach(t => {
+    const key = reportState.view === 'category' ? `cat_${t.categoryId}` : `pay_${t.payment}`;
+    if (!groups[key]) groups[key] = { income: 0, expense: 0, count: 0, payment: t.payment, categoryId: t.categoryId };
+    if (t.type === 'income') groups[key].income += t.amount;
+    else groups[key].expense += t.amount;
+    groups[key].count += 1;
+  });
+
+  const rows = Object.values(groups).sort((a, b) => (b.income + b.expense) - (a.income + a.expense));
+  const resultEl = document.getElementById('report-result');
+  if (rows.length === 0) {
+    resultEl.innerHTML = '<div class="empty-state"><div class="emoji">📊</div><p>ไม่พบข้อมูลตามเงื่อนไขที่เลือก</p></div>';
+    return;
+  }
+
+  const header = `
+    <div class="report-row report-head">
+      <div>${reportState.view === 'category' ? 'หมวดหมู่' : 'ช่องทาง'}</div>
+      <div style="text-align:right">รายรับ</div>
+      <div style="text-align:right">รายจ่าย</div>
+      <div style="text-align:right">สุทธิ</div>
+    </div>
+  `;
+
+  const body = rows.map(r => {
+    const net = r.income - r.expense;
+    if (reportState.view === 'category') {
+      const cat = cats.find(c => c.id === r.categoryId) || { emoji: '📦', name: 'อื่นๆ', color: '#8892b0' };
+      return `
+        <div class="report-row">
+          <div class="report-name">${cat.emoji} ${cat.name}</div>
+          <div class="report-val" style="color:var(--green)">฿${formatMoney(r.income)}</div>
+          <div class="report-val" style="color:var(--red)">฿${formatMoney(r.expense)}</div>
+          <div class="report-val" style="color:${net >= 0 ? 'var(--green)' : 'var(--red)'}">฿${formatMoney(net)}</div>
+        </div>
+      `;
+    }
+    const pm = getPaymentMeta(r.payment);
+    return `
+      <div class="report-row">
+        <div class="report-name" style="color:${pm.color}">${pm.label}</div>
+        <div class="report-val" style="color:var(--green)">฿${formatMoney(r.income)}</div>
+        <div class="report-val" style="color:var(--red)">฿${formatMoney(r.expense)}</div>
+        <div class="report-val" style="color:${net >= 0 ? 'var(--green)' : 'var(--red)'}">฿${formatMoney(net)}</div>
+      </div>
+    `;
+  }).join('');
+
+  resultEl.innerHTML = header + body;
+}
+
 // ============ EXPORT/IMPORT ============
 async function exportData() {
   const txs = await dbGetAll('transactions');
@@ -1531,6 +1728,8 @@ function importData() {
       showToast(`Import สำเร็จ ✓ (${data.transactions?.length || 0} รายการ)`);
       renderSettingsInfo();
       if (currentPage === 'dashboard') renderDashboard();
+      if (currentPage === 'transactions') renderTransactions();
+      if (currentPage === 'report') renderReport();
     } catch { showToast('ไฟล์ไม่ถูกต้อง'); }
   };
   input.click();
@@ -1557,10 +1756,41 @@ async function init() {
   }
 }
 
+function bindReportEvents() {
+  document.getElementById('report-from').addEventListener('change', () => {
+    reportState.from = document.getElementById('report-from').value || toYMD(new Date());
+    renderReport();
+  });
+  document.getElementById('report-to').addEventListener('change', () => {
+    reportState.to = document.getElementById('report-to').value || toYMD(new Date());
+    renderReport();
+  });
+  document.getElementById('report-payment').addEventListener('change', () => {
+    reportState.payment = document.getElementById('report-payment').value;
+    if (reportState.payment !== 'credit') reportState.cardId = '';
+    renderReport();
+  });
+  document.getElementById('report-card').addEventListener('change', () => {
+    reportState.cardId = document.getElementById('report-card').value;
+    renderReport();
+  });
+  document.getElementById('report-category').addEventListener('change', () => {
+    reportState.categoryId = document.getElementById('report-category').value;
+    renderReport();
+  });
+  document.querySelectorAll('input[name="report-view"]').forEach(el => {
+    el.addEventListener('change', () => {
+      reportState.view = el.value;
+      renderReport();
+    });
+  });
+}
+
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(overlay.id); });
 });
 
+bindReportEvents();
 init();
 </script>
 </body>
